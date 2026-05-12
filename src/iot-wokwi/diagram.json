@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "author": "Michael Rodrigues",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    { "type": "wokwi-dht22", "id": "dht", "top": -120, "left": 150, "attrs": {} },
+    { "type": "wokwi-potentiometer", "id": "pot", "top": -120, "left": -100, "attrs": {} }
+  ],
+  "connections": [
+    [ "esp:3V3", "dht:VCC", "red", [ "v0" ] ],
+    [ "esp:GND", "dht:GND", "black", [ "v0" ] ],
+    [ "esp:15", "dht:SDA", "green", [ "v0" ] ],
+    [ "esp:3V3", "pot:VCC", "red", [ "v0" ] ],
+    [ "esp:GND", "pot:GND", "black", [ "v0" ] ],
+    [ "esp:34", "pot:SIG", "yellow", [ "v0" ] ]
+  ]
+}
