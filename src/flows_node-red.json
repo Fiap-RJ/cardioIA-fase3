@@ -1,0 +1,421 @@
+[
+    {
+        "id": "c9204490a7a377c0",
+        "type": "tab",
+        "label": "CardioIA-Fase3",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "6279505ea44663d2",
+        "type": "mqtt in",
+        "z": "c9204490a7a377c0",
+        "name": "Temperatura",
+        "topic": "cardioia/sensor/temperatura",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "bed601aebff09b14",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 330,
+        "y": 220,
+        "wires": [
+            [
+                "13d2f6eea3c75437",
+                "2e0ce2c13deb71d7"
+            ]
+        ]
+    },
+    {
+        "id": "13d2f6eea3c75437",
+        "type": "ui-gauge",
+        "z": "c9204490a7a377c0",
+        "name": "Temperatura",
+        "group": "af1d871b7e6f9ea1",
+        "order": 1,
+        "value": "payload",
+        "valueType": "msg",
+        "width": "6",
+        "height": 3,
+        "gtype": "gauge-half",
+        "gstyle": "needle",
+        "title": "Temperatura ºC",
+        "alwaysShowTitle": false,
+        "floatingTitlePosition": "top-left",
+        "units": "units",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "35",
+                "color": "#5cd65c",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "37",
+                "color": "#ffc800",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "39",
+                "color": "#ea5353",
+                "text": "",
+                "textType": "label"
+            }
+        ],
+        "min": "35",
+        "max": "41",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 610,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b114b3444fdb2f7a",
+        "type": "mqtt in",
+        "z": "c9204490a7a377c0",
+        "name": "Batimentos",
+        "topic": "cardioia/sensor/batimentos",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "bed601aebff09b14",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 320,
+        "y": 520,
+        "wires": [
+            [
+                "c736763df56d7633",
+                "b486d13f5a373f19"
+            ]
+        ]
+    },
+    {
+        "id": "c736763df56d7633",
+        "type": "ui-chart",
+        "z": "c9204490a7a377c0",
+        "group": "af1d871b7e6f9ea1",
+        "name": "Batimentos",
+        "label": "chart",
+        "order": 9007199254740991,
+        "chartType": "line",
+        "category": "topic",
+        "categoryType": "msg",
+        "xAxisLabel": "",
+        "xAxisProperty": "",
+        "xAxisPropertyType": "timestamp",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "{HH}:{mm}:{ss}",
+        "xmin": "",
+        "xmax": "",
+        "yAxisLabel": "",
+        "yAxisProperty": "payload",
+        "yAxisPropertyType": "msg",
+        "ymin": "40",
+        "ymax": "200",
+        "bins": 10,
+        "action": "append",
+        "stackSeries": false,
+        "pointShape": "circle",
+        "pointRadius": 4,
+        "showLegend": true,
+        "removeOlder": 1,
+        "removeOlderUnit": "3600",
+        "removeOlderPoints": "",
+        "colors": [
+            "#0095ff",
+            "#ff0000",
+            "#ff7f0e",
+            "#2ca02c",
+            "#a347e1",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#666666"
+        ],
+        "textColorDefault": true,
+        "gridColor": [
+            "#e5e5e5"
+        ],
+        "gridColorDefault": true,
+        "width": 6,
+        "height": "5",
+        "className": "",
+        "interpolation": "linear",
+        "x": 630,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2e0ce2c13deb71d7",
+        "type": "function",
+        "z": "c9204490a7a377c0",
+        "name": "Febre",
+        "func": "// Verifica se a temperatura ultrapassa 37°C\nlet temperatura = msg.payload;\nmsg.payload = temperatura > 37;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 220,
+        "wires": [
+            [
+                "5230786f42f75242"
+            ]
+        ]
+    },
+    {
+        "id": "5230786f42f75242",
+        "type": "ui-text",
+        "z": "c9204490a7a377c0",
+        "group": "af1d871b7e6f9ea1",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "name": "Febre",
+        "label": "Febre",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "value": "payload",
+        "valueType": "msg",
+        "x": 790,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "b486d13f5a373f19",
+        "type": "function",
+        "z": "c9204490a7a377c0",
+        "name": "Batimento Acelerado",
+        "func": "// Verifica se os batimentos ultrapassam 120 bpm\nlet bpm = msg.payload;\nmsg.payload = bpm > 120\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 520,
+        "wires": [
+            [
+                "7bbeaed8d560a158",
+                "75e62d897649f703"
+            ]
+        ]
+    },
+    {
+        "id": "7bbeaed8d560a158",
+        "type": "ui-text",
+        "z": "c9204490a7a377c0",
+        "group": "af1d871b7e6f9ea1",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "name": "Batimento",
+        "label": "Batimentos altos",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "value": "payload",
+        "valueType": "msg",
+        "x": 900,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "75e62d897649f703",
+        "type": "ui-led",
+        "z": "c9204490a7a377c0",
+        "name": "Batimento Acelerado",
+        "group": "af1d871b7e6f9ea1",
+        "order": -1,
+        "width": 0,
+        "height": 0,
+        "label": "Batimento Acelerado",
+        "labelPlacement": "left",
+        "labelAlignment": "center",
+        "states": [
+            {
+                "value": "true",
+                "valueType": "bool",
+                "color": "#ff0000"
+            },
+            {
+                "value": "false",
+                "valueType": "bool",
+                "color": "#00ff00"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showBorder": true,
+        "showGlow": true,
+        "x": 940,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "bed601aebff09b14",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "32a82037c8d6424aa6cdebc46d9fb3f6.s1.eu.hivemq.cloud",
+        "port": "8883",
+        "tls": "",
+        "clientid": "CardioIA_Edge_Node",
+        "autoConnect": true,
+        "usetls": true,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "af1d871b7e6f9ea1",
+        "type": "ui-group",
+        "name": "Group 1",
+        "page": "6bcc18931a669ed5",
+        "width": 6,
+        "height": 1,
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": true,
+        "disabled": false,
+        "groupType": "default"
+    },
+    {
+        "id": "6bcc18931a669ed5",
+        "type": "ui-page",
+        "name": "Page 1",
+        "ui": "44cc7ab3aa348d99",
+        "path": "/page1",
+        "icon": "home",
+        "layout": "grid",
+        "theme": "eff5252a2fb471c3",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": 0,
+                "cols": 3
+            },
+            {
+                "name": "Tablet",
+                "px": 576,
+                "cols": 6
+            },
+            {
+                "name": "Small Desktop",
+                "px": 768,
+                "cols": 9
+            },
+            {
+                "name": "Desktop",
+                "px": 1024,
+                "cols": 12
+            }
+        ],
+        "order": 1,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "44cc7ab3aa348d99",
+        "type": "ui-base",
+        "name": "My Dashboard",
+        "path": "/dashboard",
+        "appIcon": "",
+        "includeClientData": true,
+        "acceptsClientConfig": [
+            "ui-notification",
+            "ui-control"
+        ],
+        "showPathInSidebar": false,
+        "headerContent": "page",
+        "navigationStyle": "default",
+        "titleBarStyle": "default",
+        "showReconnectNotification": true,
+        "notificationDisplayTime": 1,
+        "showDisconnectNotification": true,
+        "allowInstall": false
+    },
+    {
+        "id": "eff5252a2fb471c3",
+        "type": "ui-theme",
+        "name": "Default Theme",
+        "colors": {
+            "surface": "#ffffff",
+            "primary": "#0094CE",
+            "bgPage": "#eeeeee",
+            "groupBg": "#ffffff",
+            "groupOutline": "#cccccc"
+        },
+        "sizes": {
+            "density": "default",
+            "pagePadding": "12px",
+            "groupGap": "12px",
+            "groupBorderRadius": "4px",
+            "widgetGap": "12px"
+        }
+    },
+    {
+        "id": "9b0108aeeb31967e",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "@flowfuse/node-red-dashboard": "1.30.2",
+            "@flowfuse/node-red-dashboard-2-ui-led": "1.1.0"
+        }
+    }
+]
